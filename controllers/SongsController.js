@@ -36,7 +36,7 @@ const show = (req, res, next) => {
 
 //store
 const store = (req, res, next) => {
-    const track = "E:Personal-Projects/syndicate-backend/uploads/track" + req.file.filename;
+    const track = req.file ? "E:Personal-Projects/syndicate-backend/uploads/track" + req.file.filename : null;
     let song = new Song({
         name: req.body.name,
         artist: req.body.artist,
@@ -61,9 +61,12 @@ const store = (req, res, next) => {
 
 //update
 const update = (req, res, next) => {
-    const track = req.files.track ? "E:Personal-Projects/syndicate-backend/uploads/audio/" + req.files.track[0].filename : null;
-    const image = req.files.image ? "E:Personal-Projects/syndicate-backend/uploads/image/" + req.files.image[0].filename : null;
-    const banner = req.files.banner ? "E:Personal-Projects/syndicate-backend/uploads/image/" + req.files.banner[0].filename : null;
+    // const track = req.files.track ? "E:Personal-Projects/syndicate-backend/uploads/audio/" + req.files.track[0].filename : null;
+    // const image = req.files.image ? "E:Personal-Projects/syndicate-backend/uploads/image/" + req.files.image[0].filename : null;
+    // const banner = req.files.banner ? "E:Personal-Projects/syndicate-backend/uploads/image/" + req.files.banner[0].filename : null;
+    const track = req.files.track ? "https://syndicate-backend.herokuapp.com/uploads/audio/" + req.files.track[0].filename : null;
+    const image = req.files.image ? "https://syndicate-backend.herokuapp.com/uploads/image/" + req.files.image[0].filename : null;
+    const banner = req.files.banner ? "https://syndicate-backend.herokuapp.com/uploads/image/" + req.files.banner[0].filename : null;
     let songID = req.body.songID
     let updatedData = {
         name: req.body.name,
