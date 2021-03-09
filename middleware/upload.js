@@ -1,12 +1,21 @@
 var multer = require('multer');
+var fs = require('fs');
+var image_dir = './uploads/image';
+var audio_dir = './uploads/audio';
 
 var storage = multer.diskStorage({
     destination: (req, file, cb) => {
         console.log("file______", file)
         if (file.mimetype == 'image/png' || file.mimetype == 'image/jpg' || file.mimetype == 'image/jpeg') {
+            if (!fs.existsSync(image_dir)) {
+                fs.mkdirSync(image_dir);
+            }
             cb(null, './uploads/image')
         } else if (file.mimetype == 'audio/x-flac') {
-            cb(null, './uploads/audio')
+            if (!fs.existsSync(audio_dir)) {
+                fs.mkdirSync(audio_dir);
+            }
+            cb(null, audio_dir)
         }
     },
     filename: (req, file, cb) => {
