@@ -2,7 +2,10 @@ const express = require('express');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
-const cors = require('cors')
+const cors = require('cors');
+var path = require('path');
+
+var dir = path.join(__dirname, 'uploads');
 
 const SongRoute = require('./routes/songs');
 
@@ -20,6 +23,7 @@ db.once('open', () => {
 
 const app = express();
 
+app.use(express.static(dir));
 app.use(cors());
 
 app.use(morgan('dev'));

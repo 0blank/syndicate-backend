@@ -1,4 +1,5 @@
 const Song = require('../models/Songs');
+const path = require('path');
 
 const removeEmptyOrNull = (obj) => {
     Object.keys(obj).forEach(k => {
@@ -9,7 +10,6 @@ const removeEmptyOrNull = (obj) => {
 
 // list
 const index = (req, res, next) => {
-    console.log(Song)
     Song.find().then(response => {
         res.json({
             response
@@ -61,12 +61,12 @@ const store = (req, res, next) => {
 
 //update
 const update = (req, res, next) => {
-    // const track = req.files.track ? "E:Personal-Projects/syndicate-backend/uploads/audio/" + req.files.track[0].filename : null;
-    // const image = req.files.image ? "E:Personal-Projects/syndicate-backend/uploads/image/" + req.files.image[0].filename : null;
-    // const banner = req.files.banner ? "E:Personal-Projects/syndicate-backend/uploads/image/" + req.files.banner[0].filename : null;
-    const track = req.files.track ? "https://syndicate-backend.herokuapp.com/uploads/audio/" + req.files.track[0].filename : null;
-    const image = req.files.image ? "https://syndicate-backend.herokuapp.com/uploads/image/" + req.files.image[0].filename : null;
-    const banner = req.files.banner ? "https://syndicate-backend.herokuapp.com/uploads/image/" + req.files.banner[0].filename : null;
+    // const track = req.files.track ? "http://localhost/audio/" + req.files.track[0].filename : null;
+    // const image = req.files.image ? "http://localhost/image/" + req.files.image[0].filename : null;
+    // const banner = req.files.banner ? "http://localhost/image/" + req.files.banner[0].filename : null;
+    const track = req.files.track ? "https://syndicate-backend.herokuapp.com/audio/" + req.files.track[0].filename : null;
+    const image = req.files.image ? "https://syndicate-backend.herokuapp.com/image/" + req.files.image[0].filename : null;
+    const banner = req.files.banner ? "https://syndicate-backend.herokuapp.com/image/" + req.files.banner[0].filename : null;
     let songID = req.body.songID
     let updatedData = {
         name: req.body.name,
